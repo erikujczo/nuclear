@@ -14,7 +14,8 @@
   "main": "src/index.ts",
   "scripts": {
     "lint": "eslint src/**/*.ts --fix",
-    "test": "eslint src/**/**/**/**/*.ts test/**/*.ts && ava -v"
+    "test": "eslint src/**/**/**/**/*.ts test/**/*.ts && ava -v",
+    "coverage": "eslint src/**/**/**/**/*.ts test/**/*.ts && nyc ava -v"
   },
   "dependencies": {
     "@babel/core": "^7.7.7",
@@ -23,6 +24,7 @@
     "bandcamp-scraper": "^1.2.4",
     "electron-store": "^5.1.0",
     "electron-timber": "^0.5.1",
+    "fetch-mock": "^9.11.0",
     "get-artist-title": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.2.1",
@@ -41,6 +43,7 @@
     "ava": "^2.4.0",
     "eslint": "^7.11.0",
     "mock-require": "^3.0.3",
+    "nyc": "^15.1.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "ytdl-core": "^3.3.0"

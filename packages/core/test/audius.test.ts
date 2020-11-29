@@ -11,7 +11,6 @@ mock('electron', electron);
 
 import { rest } from '../src';
 
-
 test('audius host is selected', async (t) => {
   const endpoint = await rest.Audius._findHost();
   const gex = /^https:\/\/discoveryprovider[0-9]?/;
@@ -30,6 +29,23 @@ test('search artists', async t => {
 test('search tracks', async t => {
   const endpoint = await rest.Audius._findHost();
   const response = await rest.Audius.trackSearch(endpoint, 'roto');
+  const json = await response.json();
+  t.is(typeof json, 'object');
+  t.true(json.data instanceof Array);
+  t.true(json.data.length > 0);
+});
+
+test('get artist', async t => {
+  const endpoint = await rest.Audius._findHost();
+  const response = await rest.Audius.getArtist(endpoint, 'LxNze');
+  const json = await response.json();
+  t.is(typeof json, 'object');
+  t.true(json.data instanceof Object);
+});
+
+test('get artist tracks', async t => {
+  const endpoint = await rest.Audius._findHost();
+  const response = await rest.Audius.getArtistTracks(endpoint, 'LxNze');
   const json = await response.json();
   t.is(typeof json, 'object');
   t.true(json.data instanceof Array);

@@ -226,6 +226,7 @@
     }
   },
   "dependencies": {
+    "cloc": "^2.7.0",
     "sqlite3": "^4.2.0"
   }
 }
