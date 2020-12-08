@@ -15,34 +15,30 @@ const setupLastFmApi = (key: string, secret: string): rest.LastFmApi => {
   return new rest.LastFmApi(key, secret);
 };
 
+const testApi = setupLastFmApi('test', 'test');
+const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
+  '2ee49e35f08b837d43b2824198171fc8');
+const url = 'http://example.com?test=test1&test2=test3';
+
 test('add api key to url', t => {
-  const api = setupLastFmApi('test', 'test');
-  const url = 'http://example.com?test=test1&test2=test3';
-  const withKey = api.addApiKey(url);
+  const withKey = testApi.addApiKey(url);
 
   t.is(withKey, 'http://example.com?test=test1&test2=test3&api_key=test');
 });
 
 test('sign url', t => {
-  const api = setupLastFmApi('test', 'test');
-  const url = 'http://example.com?test=test1&test2=test3';
-  const signed = api.sign(url);
+  const signed = testApi.sign(url);
 
   t.is(signed, '4dd7efc68ff9d7c293ac0f71eb133ace');
 });
 
 test('prepare url', t => {
-  const api = setupLastFmApi('test', 'test');
-  const url = 'http://example.com?test=test1&test2=test3';
-  const prepared = api.prepareUrl(url);
+  const prepared = testApi.prepareUrl(url);
 
   t.is(prepared, 'http://example.com?test=test1&test2=test3&api_key=test&api_sig=cd28b8fd248073c89aad9b77dd069567');
 });
 
 test('get top tracks', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getTopTracks();
   const data = await response.json();
 
@@ -51,9 +47,6 @@ test('get top tracks', async t => {
 });
 
 test('get artist info', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getArtistInfo('Linkin Park');
   const data = await response.json();
 
@@ -62,9 +55,6 @@ test('get artist info', async t => {
 });
 
 test('get artist top tracks', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getArtistTopTracks('Linkin Park');
   const data = await response.json();
 
@@ -73,9 +63,6 @@ test('get artist top tracks', async t => {
 });
 
 test('search tracks', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.searchTracks('billie jean');
   const data = await response.json();
 
@@ -85,9 +72,6 @@ test('search tracks', async t => {
 });
 
 test('get top tags', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getTopTags();
   const data = await response.json();
 
@@ -96,9 +80,6 @@ test('get top tags', async t => {
 });
 
 test('get tag info', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getTagInfo('rock');
   const data = await response.json();
 
@@ -107,9 +88,6 @@ test('get tag info', async t => {
 });
 
 test('get tag track', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getTagTracks('rock');
   const data = await response.json();
 
@@ -118,9 +96,6 @@ test('get tag track', async t => {
 });
 
 test('get tag album', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getTagAlbums('rock');
   const data = await response.json();
 
@@ -129,9 +104,6 @@ test('get tag album', async t => {
 });
 
 test('get tag artist', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getTagArtists('rock');
   const data = await response.json();
 
@@ -140,9 +112,6 @@ test('get tag artist', async t => {
 });
 
 test('get similar tag', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getSimilarTags('rock');
   const data = await response.json();
 
@@ -151,9 +120,6 @@ test('get similar tag', async t => {
 });
 
 test('get similar track', async t => {
-  const api = setupLastFmApi('2b75dcb291e2b0c9a2c994aca522ac14',
-    '2ee49e35f08b837d43b2824198171fc8');
-
   const response = await api.getSimilarTracks('Linkin Park', 'Numb');
   const data = await response.json();
 
