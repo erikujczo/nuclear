@@ -1,6 +1,11 @@
 name: CI job
 
-on: [push]
+on: 
+  push:
+    branches: [master]
+    # ignore changes in documentation files
+    paths-ignore:
+      - "*.md"
 
 jobs:
   linux_build:

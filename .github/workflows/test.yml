@@ -1,10 +1,11 @@
 name: Run tests
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
+      # ignore changes in documentation files
+    paths-ignore:
+      - "*.md"
 
 jobs:
   linux_build:
